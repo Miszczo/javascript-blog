@@ -54,6 +54,13 @@ body {
 
 .posts {
   flex: 2 0 0;
+  .post-tags{
+    ul {
+      li {
+        margin-right: 5px;
+      }
+    }
+  }
 }
 
 .sidebar, .posts {
