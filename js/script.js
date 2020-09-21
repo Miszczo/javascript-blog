@@ -36,7 +36,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post .post-author';
+  optArticleAuthorSelector = '.post .post-author',
+  optTagsListSelector = '.tags.list';
 // generateTitleLinks function
 function generateTitleLinks(customSelector = ''){
   console.log(generateTitleLinks);
@@ -78,8 +79,11 @@ function generateTitleLinks(customSelector = ''){
 }
 generateTitleLinks();
 
+
 // GENERATE_TAGS FUNCTION
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   console.log(articles);
@@ -100,15 +104,23 @@ function generateTags(){
     for(let tag of articleTagsArray){
       /* generate HTML of the link */
       const linkHTML = '<li><a href="#tag-' + tag + '">' + tag +  '</a></li>';
-
       /* add generated code to html variable */
       tagsWrapper.innerHTML = tagsWrapper.innerHTML + linkHTML;
+      /* [NEW] check if this link is NOT already in allTags */
+      if(allTags.indexOf(linkHTML) == -1){
+        /* [NEW] add generated code to allTags array */
+        allTags.push(linkHTML);
+      }
     /* END LOOP: for each tag */
     }
     /* insert HTML of all the links into the tags wrapper */
     articles.innerHTML = html;
   /* END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+  /* [NEW] add html from allTags to tagList */
+  tagList.innerHTML = allTags.join(' ');
 }
 generateTags();
 
@@ -237,7 +249,7 @@ function authorClickHandler(event){
 
 function addClickListenersToAuthors(){
   /* find all links to authors */
-  const linksToAuthors = document.querySelectorAll('.post-author a, .list.authors a')
+  const linksToAuthors = document.querySelectorAll('.post-author a, .list.authors a');
   /* START LOOP: for each link */
   for(let link of linksToAuthors){
     /* add tagClickHandler as event listener for that link */
