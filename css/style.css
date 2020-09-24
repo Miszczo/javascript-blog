@@ -44,13 +44,21 @@ body {
       flex: 1 0 0;
 }
 
+.sidebar .tags .tag-size-4 {
+  font-size: 29px;
+}
+
+.sidebar .tags .tag-size-3 {
+  font-size: 25px;
+}
+
+.sidebar .tags .tag-size-2 {
+  font-size: 16px;
+}
+
 .posts {
   -ms-flex: 2 0 0px;
       flex: 2 0 0;
-}
-
-.posts .post-tags ul li {
-  margin-right: 5px;
 }
 
 .sidebar, .posts {
@@ -110,5 +118,9 @@ body {
 
 .post-tags p {
   margin: 0 10px 0 0;
+}
+
+.post-tags .list-horizontal li a {
+  padding-right: 6px;
 }
 /*# sourceMappingURL=style.css.map */
