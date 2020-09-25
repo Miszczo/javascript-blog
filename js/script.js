@@ -1,5 +1,7 @@
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
   authorListLink: Handlebars.compile(document.querySelector('#template-author-list-link').innerHTML)
 };
@@ -151,9 +153,11 @@ function generateTags(){
     /* START LOOP: for each tag */
     for(let tag of articleTagsArray){
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + tag + '">' + tag +  '</a></li>';
+      // const linkHTML = '<li><a href="#tag-' + tag + '">' + tag +  '</a></li>';
+      const tagHTMLData = {id: tag, title: tag};
+      const tagLinkHTML = templates.tagLink(tagHTMLData);
       /* add generated code to html variable */
-      tagsWrapper.innerHTML = tagsWrapper.innerHTML + linkHTML;
+      tagsWrapper.innerHTML = tagsWrapper.innerHTML + tagLinkHTML;
       /* [NEW] check if this link is NOT already in allTags */
       if(!allTags.hasOwnProperty(tag)){ // eslint-disable-line no-prototype-builtins
         /* [NEW] add generated code to allTags object */
@@ -269,15 +273,17 @@ function generateAuthors() {
     const author = article.getAttribute('data-author');
     console.log(author);
     /* generate HTML of the author link */
-    const linkHTML =
-      '<a href="#author-' +
-      author +
-      '"><span>' +
-      author +
-      '</span></a>';
-    console.log(linkHTML);
+    // const linkHTML =
+    //   '<a href="#author-' +
+    //   author +
+    //   '"><span>' +
+    //   author +
+    //   '</span></a>';
+    const authorHTMLData = {id: author, title: author};
+    const authorLinkHTML = templates.authorLink(authorHTMLData);
+    console.log(authorLinkHTML);
     /* add generated code to html variable */
-    html = html + linkHTML;
+    html = html + authorLinkHTML;
     console.log(html);
 
     /* [NEW] check if this link is NOT already in allAuthors */
